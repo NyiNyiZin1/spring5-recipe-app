@@ -1,5 +1,6 @@
 package twonyizin.springframework.spring5recipeapp.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,6 +10,7 @@ import twonyizin.springframework.spring5recipeapp.services.RecipeService;
 
 import java.util.Optional;
 
+@Slf4j
 @Controller
 public class IndexController {
 //    private CategoryRepository categoryRepository;
@@ -26,6 +28,7 @@ public class IndexController {
 //        Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
 //        System.err.println("Cat Id is: "+categoryOptional.get().getId());
 //        System.err.println("UOM Id is: "+unitOfMeasureOptional.get().getId());
+        log.debug("Getting Index page");
         model.addAttribute("recipes",recipeService.getRecipes());
         return "index";
     }
