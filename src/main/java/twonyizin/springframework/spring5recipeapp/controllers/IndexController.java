@@ -13,23 +13,17 @@ import java.util.Optional;
 @Slf4j
 @Controller
 public class IndexController {
-//    private CategoryRepository categoryRepository;
-//    private UnitOfMeasureRepository unitOfMeasureRepository;
     private final RecipeService recipeService;
 
     public IndexController(RecipeService recipeService) {
         this.recipeService = recipeService;
     }
 
-
-    @RequestMapping({"","/","index"})
-    public String getIndexPage(Model model){
-//        Optional<Category> categoryOptional = categoryRepository.findByDescription("American");
-//        Optional<UnitOfMeasure> unitOfMeasureOptional = unitOfMeasureRepository.findByDescription("Teaspoon");
-//        System.err.println("Cat Id is: "+categoryOptional.get().getId());
-//        System.err.println("UOM Id is: "+unitOfMeasureOptional.get().getId());
+    @RequestMapping({"", "/", "/index"})
+    public String getIndexPage(Model model) {
         log.debug("Getting Index page");
-        model.addAttribute("recipes",recipeService.getRecipes());
+        model.addAttribute("recipes", recipeService.getRecipes());
+
         return "index";
     }
 }

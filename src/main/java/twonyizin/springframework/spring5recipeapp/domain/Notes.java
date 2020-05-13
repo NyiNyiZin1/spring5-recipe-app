@@ -8,6 +8,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(exclude = "recipe")//java.lang.StackOverflowError: null
 @Entity
 public class Notes {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,7 +16,8 @@ public class Notes {
     @OneToOne
     private Recipe recipe;
 
-    @Lob//I think recipeNotes data is the most data
+    @Lob
     private String recipeNotes;
 
 }
+

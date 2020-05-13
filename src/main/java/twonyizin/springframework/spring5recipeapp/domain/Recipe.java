@@ -9,6 +9,7 @@ import java.util.Set;
 @Data
 @Entity
 public class Recipe {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
