@@ -8,6 +8,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import twonyizin.springframework.spring5recipeapp.converters.RecipeCommandToRecipe;
+import twonyizin.springframework.spring5recipeapp.converters.RecipeToRecipeCommand;
 import twonyizin.springframework.spring5recipeapp.domain.Recipe;
 import twonyizin.springframework.spring5recipeapp.repositories.RecipeRepository;
 
@@ -24,16 +26,19 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 public class RecipeServiceImplTest {
 
-    private RecipeService recipeService;
-
+    RecipeServiceImpl recipeService;
 
     @Mock
-    private RecipeRepository recipeRepository;
+    RecipeRepository recipeRepository;
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeCommandToRecipe, recipeToRecipeCommand);
     }
 
     @Test
@@ -66,5 +71,14 @@ public class RecipeServiceImplTest {
         assertEquals("More than one recipe returned!", 1, recipes.size());
         verify(recipeRepository, times(1)).findAll();
         verify(recipeRepository, never()).findById(anyLong());
+    }
+
+    @Test
+    public void deleteByIdTest() throws Exception {
+        Long idDelete = Long.valueOf(2L);
+
+        recipeService.deleteById(idDelete);
+
+        verify(recipeRepository, times(1)).deleteById(anyLong());
     }
 }
